@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c26joijy4eeco"]
+
+[ext_resource type="PackedScene" uid="uid://b38txbn2a0vlk" path="res://assets/models/MeatChunk.glb" id="1_0akxd"]
+
+[node name="MeatChunk" type="Node3D" unique_id=1597787723]
+
+[node name="MeatChunk" parent="." unique_id=1759476029 instance=ExtResource("1_0akxd")]

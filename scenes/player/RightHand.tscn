@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dqfngys06lru5"]
+
+[ext_resource type="PackedScene" uid="uid://krkvpqvphjsu" path="res://scenes/player/RightHandf.tscn" id="1_ruym3"]
+[ext_resource type="Script" uid="uid://dipp33xosw2qs" path="res://scripts/viewmodel/RightHand.gd" id="2_70u67"]
+
+[node name="RightHand" type="Node3D" unique_id=1539032269]
+
+[node name="RightHand" parent="." unique_id=1279725254 instance=ExtResource("1_ruym3")]
+transform = Transform3D(5.063316e-16, 1.1583517e-08, -0.265, 0.265, -1.1583517e-08, 0, -1.1583517e-08, -0.265, -1.1583517e-08, 0, 0, 0)
+script = ExtResource("2_70u67")

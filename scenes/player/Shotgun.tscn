@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dks6dyws6nhu1"]
+
+[ext_resource type="PackedScene" uid="uid://bi0grv1n2gmfx" path="res://assets/models/Shotgun.glb" id="1_34d4w"]
+[ext_resource type="Texture2D" uid="uid://dq8dg1nrfluvi" path="res://assets/textures/misc/90ca6a08c55ef85318af255bf1310fdd.jpg" id="2_m8rod"]
+[ext_resource type="PackedScene" uid="uid://d2ucv5do1owy" path="res://scenes/player/Eyeball.tscn" id="3_eye"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0vr0j"]
+shading_mode = 0
+albedo_texture = ExtResource("2_m8rod")
+uv1_scale = Vector3(0.385, 0.385, 0.385)
+uv1_triplanar = true
+
+[node name="ShotgunModel" unique_id=412255077 instance=ExtResource("1_34d4w")]
+
+[node name="ps3_Cube_003" parent="." index="0" unique_id=1595829796]
+material_override = SubResource("StandardMaterial3D_0vr0j")
+
+[node name="MuzzleLeft" type="Marker3D" parent="." index="1" unique_id=310915276]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06, 1.4754283, 0.72)
+
+[node name="MuzzleRight" type="Marker3D" parent="." index="2" unique_id=753733909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06, 1.4754283, -0.07999998)
+
+[node name="LoadedEyeballLeft" parent="." index="3" unique_id=1174794670 instance=ExtResource("3_eye")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -0.06, 0.02, -0.22)
+visible = false
+
+[node name="LoadedEyeballRight" parent="." index="4" unique_id=2136022532 instance=ExtResource("3_eye")]
+transform = Transform3D(0.35, 0, 0, 0, 0.35, 0, 0, 0, 0.35, 0.06, 0.02, -0.22)
+visible = false

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://krkvpqvphjsu"]
+
+[ext_resource type="PackedScene" uid="uid://c4r37lh4hjkn3" path="res://assets/models/RightHand.glb" id="1_cwe5g"]
+[ext_resource type="Texture2D" uid="uid://dq8dg1nrfluvi" path="res://assets/textures/misc/90ca6a08c55ef85318af255bf1310fdd.jpg" id="2_cwe5g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c2bip"]
+shading_mode = 0
+albedo_texture = ExtResource("2_cwe5g")
+uv1_scale = Vector3(0.63, 0.63, 0.63)
+uv1_triplanar = true
+
+[node name="RightHand" unique_id=1279725254 instance=ExtResource("1_cwe5g")]
+
+[node name="Skeleton3D" parent="Armature" parent_id_path=PackedInt32Array(1535325973) index="0" unique_id=675240398]
+bones/3/rotation = Quaternion(0.0058871964, -0.23092124, -0.6717291, 0.7038614)
+bones/4/rotation = Quaternion(-0.030864192, 0.29122883, 0.3577251, 0.8867164)
+bones/8/rotation = Quaternion(0.596511, -0.020575142, -0.52949035, 0.6028194)
+bones/9/rotation = Quaternion(0.8783146, 0.14010489, -0.052584793, 0.45405832)
+bones/11/rotation = Quaternion(0.6113431, 0.14841664, -0.25440702, 0.7345129)
+bones/12/rotation = Quaternion(0.88145876, 0.118728, -0.025224335, 0.45639676)
+bones/14/rotation = Quaternion(0.20103061, -0.015974816, -0.05323322, 0.978007)
+bones/18/rotation = Quaternion(0.114689514, -0.0010196455, 0.032104596, 0.992882)
+
+[node name="ps3_Cube_002" parent="Armature/Skeleton3D" index="0" unique_id=133637349]
+material_override = SubResource("StandardMaterial3D_c2bip")
+cast_shadow = 0

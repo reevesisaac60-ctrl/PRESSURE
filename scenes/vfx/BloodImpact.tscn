@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://b7l8cloncafxa"]
+
+[sub_resource type="Gradient" id="Gradient_a1x0g"]
+offsets = PackedFloat32Array(0.003816794, 0.5114504, 1)
+colors = PackedColorArray(0.84705883, 0, 0, 1, 0.70980394, 0.11764706, 0.19607843, 1, 0.24861205, 0.031785514, 0.05258593, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_cw2d6"]
+gradient = SubResource("Gradient_a1x0g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pmmyi"]
+direction = Vector3(1, 0, -1)
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 9.0
+gravity = Vector3(0, -18, 0)
+damping_min = 1.0
+damping_max = 3.0000002
+scale_min = 0.0
+scale_max = 0.08
+color_ramp = SubResource("GradientTexture1D_cw2d6")
+collision_mode = 1
+collision_friction = 0.5
+collision_bounce = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pmmyi"]
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_a1x0g"]
+material = SubResource("StandardMaterial3D_pmmyi")
+radial_segments = 4
+rings = 1
+
+[node name="BloodImpact" type="Node3D" unique_id=1625385883]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=821126321]
+emitting = false
+amount = 500
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_pmmyi")
+draw_pass_1 = SubResource("SphereMesh_a1x0g")

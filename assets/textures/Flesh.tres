@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bul1lbpmr621i"]
+
+[ext_resource type="Texture2D" uid="uid://dexw6mn4qy3nu" path="res://assets/textures/Flesh.jpg" id="1_4crds"]
+
+[resource]
+albedo_texture = ExtResource("1_4crds")
+metallic_specular = 0.0
+texture_filter = 2

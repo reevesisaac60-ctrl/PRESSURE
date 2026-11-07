@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cpvfx30bs8kvk"]
+
+[ext_resource type="Script" uid="uid://bi7g2l6144cme" path="res://scripts/effects/Blood.gd" id="1_pyv65"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jprgb"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_a7h4y"]
+material = SubResource("StandardMaterial3D_jprgb")
+radial_segments = 4
+rings = 1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jprgb"]
+
+[node name="BloodImpact" type="RigidBody3D" unique_id=1725101880]
+mass = 0.05
+continuous_cd = true
+linear_damp = 0.5
+angular_damp = 1.0
+script = ExtResource("1_pyv65")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=964204456]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+mesh = SubResource("SphereMesh_a7h4y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1547332538]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+shape = SubResource("SphereShape3D_jprgb")

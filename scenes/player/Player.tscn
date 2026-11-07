@@ -1,0 +1,157 @@
+[gd_scene format=3 uid="uid://dxy15mcdvlq3q"]
+
+[ext_resource type="Script" uid="uid://duaxiovhwxpxh" path="res://scripts/player/PlayerController.gd" id="1_3li8b"]
+[ext_resource type="PackedScene" uid="uid://dqfngys06lru5" path="res://scenes/player/RightHand.tscn" id="2_v6fml"]
+[ext_resource type="Script" uid="uid://dkuqc2w21wxte" path="res://scripts/weapons/FingerGun.gd" id="3_qu4a1"]
+[ext_resource type="PackedScene" uid="uid://b38txbn2a0vlk" path="res://assets/models/MeatChunk.glb" id="4_70d11"]
+[ext_resource type="Shader" uid="uid://o3uk80iu160h" path="res://shaders/pixel.gdshader" id="4_mdl7e"]
+[ext_resource type="PackedScene" uid="uid://b7l8cloncafxa" path="res://scenes/vfx/BloodImpact.tscn" id="5_cw2d6"]
+[ext_resource type="PackedScene" uid="uid://dks6dyws6nhu1" path="res://scenes/player/Shotgun.tscn" id="6_2xrq6"]
+[ext_resource type="PackedScene" uid="uid://cpvfx30bs8kvk" path="res://scenes/vfx/BloodImpactRigid.tscn" id="6_khinc"]
+[ext_resource type="PackedScene" uid="uid://btac4y0qudkv3" path="res://scenes/vfx/BloodSplatter.tscn" id="7_bruh7"]
+[ext_resource type="Script" uid="uid://bt0olw2d5awc3" path="res://scripts/player/PlayerMovement.gd" id="8_move"]
+[ext_resource type="Script" uid="uid://cnmwek41x0h7s" path="res://scripts/player/PlayerLook.gd" id="9_look"]
+[ext_resource type="Script" uid="uid://dtr5y6qtftoli" path="res://scripts/player/CameraEffects.gd" id="10_cfx"]
+[ext_resource type="Script" uid="uid://dl7cponn2fvrd" path="res://scripts/components/HealthComponent.gd" id="11_hp"]
+[ext_resource type="Script" uid="uid://bundan0ryamnf" path="res://scripts/viewmodel/ViewmodelController.gd" id="12_vm"]
+[ext_resource type="Script" uid="uid://dia5csfrmccd8" path="res://scripts/weapons/ProjectileVisuals.gd" id="13_pv"]
+[ext_resource type="Script" uid="uid://dfqj80ml0585j" path="res://scripts/effects/BloodEffects.gd" id="14_be"]
+[ext_resource type="Script" uid="uid://6brt375sqn8o" path="res://scripts/viewmodel/ViewmodelRenderer.gd" id="15_vr"]
+[ext_resource type="Script" uid="uid://blhkne4qjva68" path="res://scripts/weapons/EyeballShotgun.gd" id="16_esg"]
+[ext_resource type="Texture2D" uid="uid://c3wi7a5bxux8q" path="res://assets/textures/cross.png" id="17_ejd4k"]
+[ext_resource type="PackedScene" uid="uid://d2ucv5do1owy" path="res://scenes/player/Eyeball.tscn" id="18_eproj"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_a7h4y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3li8b"]
+shader = ExtResource("4_mdl7e")
+shader_parameter/pixel_size = 3.5590001215525
+
+[node name="Player" type="CharacterBody3D" unique_id=1543922056]
+script = ExtResource("1_3li8b")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=1023255193]
+shape = SubResource("CylinderShape3D_a7h4y")
+
+[node name="Movement" type="Node" parent="." unique_id=2100000001 node_paths=PackedStringArray("body", "camera")]
+script = ExtResource("8_move")
+body = NodePath("..")
+camera = NodePath("../Camera3D")
+
+[node name="Look" type="Node" parent="." unique_id=2100000002 node_paths=PackedStringArray("body")]
+script = ExtResource("9_look")
+body = NodePath("..")
+
+[node name="CameraEffects" type="Node" parent="." unique_id=2100000003 node_paths=PackedStringArray("body", "camera", "look", "movement")]
+script = ExtResource("10_cfx")
+body = NodePath("..")
+camera = NodePath("../Camera3D")
+look = NodePath("../Look")
+movement = NodePath("../Movement")
+
+[node name="Health" type="Node" parent="." unique_id=2100000004]
+script = ExtResource("11_hp")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1063648958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43992674, 0)
+fov = 100.0
+near = 0.001
+far = 1000.0
+
+[node name="ViewModel" type="Node3D" parent="Camera3D" unique_id=790503975]
+
+[node name="RightHand" type="Node3D" parent="Camera3D/ViewModel" unique_id=298059632 node_paths=PackedStringArray("player_body", "motion_target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.62501234, -0.35, -0.6797565)
+script = ExtResource("12_vm")
+player_body = NodePath("../../..")
+motion_target = NodePath(".")
+
+[node name="RightHandModel" parent="Camera3D/ViewModel/RightHand" unique_id=1539032269 instance=ExtResource("2_v6fml")]
+
+[node name="MuzzlePoint" type="Marker3D" parent="Camera3D/ViewModel/RightHand" unique_id=68939198]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035680413, -0.17027584)
+
+[node name="FingerGun" type="Node" parent="Camera3D/ViewModel/RightHand" unique_id=2100000005 node_paths=PackedStringArray("camera", "player_body", "viewmodel", "projectile_visuals")]
+script = ExtResource("3_qu4a1")
+camera = NodePath("../../..")
+player_body = NodePath("../../../..")
+viewmodel = NodePath("..")
+projectile_visuals = NodePath("../ProjectileVisuals")
+
+[node name="ProjectileVisuals" type="Node" parent="Camera3D/ViewModel/RightHand" unique_id=2100000006 node_paths=PackedStringArray("muzzle_point", "blood_effects")]
+script = ExtResource("13_pv")
+muzzle_point = NodePath("../MuzzlePoint")
+blood_effects = NodePath("../BloodEffects")
+projectile_scene = ExtResource("4_70d11")
+projectile_speed = 50.0
+projectile_maximum_time = 5.595
+tumbling_speed = 1200.0
+
+[node name="BloodEffects" type="Node" parent="Camera3D/ViewModel/RightHand" unique_id=2100000007 node_paths=PackedStringArray("ignore_body")]
+script = ExtResource("14_be")
+ignore_body = NodePath("../../../..")
+impact_effect_scene = ExtResource("5_cw2d6")
+blood_droplet_scene = ExtResource("6_khinc")
+droplet_count = 70
+droplet_max_speed = 9.465
+droplet_spread = 100.0
+blood_splatter_scene = ExtResource("7_bruh7")
+
+[node name="Shotgun" parent="Camera3D/ViewModel" unique_id=412255077 node_paths=PackedStringArray("player_body", "motion_target") instance=ExtResource("6_2xrq6")]
+transform = Transform3D(-1.4861872e-08, 0, -0.34, 0.33985528, 0.009918944, -1.4855546e-08, 0.009918944, -0.33985528, -4.335708e-10, 0.096744, -0.5845507, -0.5489714)
+visible = false
+script = ExtResource("12_vm")
+player_body = NodePath("../../..")
+motion_target = NodePath(".")
+mouse_sway_amount = 0.0
+
+[node name="Weapon" type="Node3D" parent="Camera3D/ViewModel/Shotgun" unique_id=1737861218 node_paths=PackedStringArray("camera", "player_body", "viewmodel", "blood_effects", "muzzle_left", "muzzle_right")]
+script = ExtResource("16_esg")
+camera = NodePath("../../..")
+player_body = NodePath("../../../..")
+viewmodel = NodePath("..")
+blood_effects = NodePath("../../RightHand/BloodEffects")
+muzzle_left = NodePath("../MuzzleLeft")
+muzzle_right = NodePath("../MuzzleRight")
+projectile_scene = ExtResource("18_eproj")
+visual_recoil_strength = 63.05
+
+[node name="ViewmodelRenderer" type="Node" parent="." unique_id=2100000008 node_paths=PackedStringArray("main_camera", "viewmodel_root")]
+script = ExtResource("15_vr")
+main_camera = NodePath("../Camera3D")
+viewmodel_root = NodePath("../Camera3D/ViewModel")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=453402635]
+
+[node name="Shader" type="ColorRect" parent="CanvasLayer" unique_id=262136399]
+material = SubResource("ShaderMaterial_3li8b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=2020785121]
+
+[node name="Control" type="Control" parent="CanvasLayer2" unique_id=1586408884]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2/Control" unique_id=252657633]
+layout_mode = 0
+offset_left = -556.0
+offset_top = -304.0
+offset_right = -516.0
+offset_bottom = -264.0
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("17_ejd4k")
